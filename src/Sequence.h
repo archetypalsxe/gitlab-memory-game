@@ -16,9 +16,11 @@ static const bool WINDOWS = false;
 
 using namespace std;
 
+extern const int STARTING_LIVES;
+
 class Sequence {
     public:
-        Sequence();
+        Sequence(int);
         bool checkCharacter(int);
         bool hasLivesRemaining();
         int getDifficulty();
@@ -31,12 +33,6 @@ class Sequence {
 
     protected:
         char sequence[50];
-        /**
-         *	Difficulty of:
-         *		1: Only lowercase letters a-z
-         *		2: Lowercase Letters & numbers a-z, 0-9
-         *		3: Upper & Lowercase Letters & Numbers: A-z, 0-9
-         */
         int difficulty;
         int livesRemaining;
         int position;

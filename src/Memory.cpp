@@ -1,31 +1,84 @@
-//cout
 #include <iostream>
 #include <stdio.h>
 #include <limits>
 
-//Getch
+// Used for obtaining a single keystroke
 #include "getch.h"
 
-//Sequence class
 #include "Sequence.h"
 
 using namespace std;
 
+const int MAX_LENGTH = 20;
+const int MIN_DIFFICULTY = 1;
+const int MAX_DIFFICULTY = 1;
+
 bool getEnteredSequence(Sequence);
+bool validDifficultySelection(int);
+int mainMenu();
 void clearKeyboardBuffer();
 void clearWindow();
+void displayDifficultyMenu();
 void performGameMainLoop(Sequence);
 void processEnteredSequence(bool, Sequence*);
-void mainMenu();
 
+/**
+ * This is where we initialize everything and get the game going
+ */
 int main() {
-    clearWindow();
-    Sequence sequence;
-    mainMenu();
+    int difficulty = mainMenu();
+    Sequence sequence(difficulty);
     sequence.generateSequence();
     performGameMainLoop(sequence);
 }
 
+/**
+ * Retrieves input from the user until they complete the sequence or they
+ * enter a character incorrectly. Returns whether or not they entered the
+ * entirity of the sequence correctly or not
+ */
+bool getEnteredSequence(Sequence sequence) {
+    int character, charactersEntered = 0;
+    bool correct = false;
+
+    do {
+        character = getch();
+        charactersEntered++;
+    } while (
+        (correct = sequence.checkCharacter(character)) &&
+        charactersEntered < sequence.getLength()
+    );
+
+    return correct;
+}
+
+/**
+ * Test to see whether a user's difficulty selection is valid or not
+ */
+bool validDifficultySelection(int selection) {
+    return selection >= MIN_DIFFICULTY && selection <= MAX_DIFFICULTY;
+}
+
+/**
+ * Display the main menu to the user and returns their selection for
+ * difficulty
+ */
+int mainMenu() {
+    int difficulty;
+    do {
+        clearWindow();
+        displayDifficultyMenu();
+        cin >> difficulty;
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (!validDifficultySelection(difficulty));
+    clearWindow();
+    return difficulty;
+}
+
+/**
+ * Clear the terminal based on whether we are in Windows or not
+ */
 void clearWindow() {
     if(WINDOWS) {
         system("cls");
@@ -34,38 +87,34 @@ void clearWindow() {
     }
 }
 
-void mainMenu() {
-    int difficulty = 0;
-    bool valid = false;
-    do {
-        cout << "The Memory Game!" << endl << endl << endl;
-        cout << "Please select your difficulty:" << endl;
-        cout << "==================================" << endl;
-        cout << "1) Only letters" << endl;
-        cout << "2) Letters and numbers" << endl;
-        cout << "3) Case-sensitive letters and numbers" << endl;
-
-        cin >> difficulty;
-        cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        if(difficulty) {
-            valid = true;
-        }
-    } while (!valid);
-    clearWindow();
+/**
+ * Display the difficulty menu to the user
+ */
+void displayDifficultyMenu() {
+    cout << "The Memory Game!" << endl << endl << endl;
+    cout << "Please select your difficulty:" << endl;
+    cout << "==================================" << endl;
+    cout << "1) Only letters" << endl;
+    cout << "2) Letters and numbers" << endl;
+    cout << "3) Case-sensitive letters and numbers" << endl;
 }
 
 /**
- * Does the main game loop
- *
- * @param Sequence sequence
+ * The main game loop where all the magic happens. This is where we take
+ * user input and whatnot
  */
 void performGameMainLoop(Sequence sequence) {
     bool correct;
 
-    for(int counter = 0; counter < 20 && sequence.hasLivesRemaining(); counter++) {
+    for(
+        int counter = 0;
+        counter < MAX_LENGTH && sequence.hasLivesRemaining();
+        counter++
+    ) {
         sequence.displaySequence();
         clearKeyboardBuffer();
+
+        cout << "Enter sequence: " << endl;
 
         correct = getEnteredSequence(sequence);
         processEnteredSequence(correct, &sequence);
@@ -83,32 +132,14 @@ void clearKeyboardBuffer() {
 }
 
 /**
- * Get's the player's entered sequence
- */
-bool getEnteredSequence(Sequence sequence) {
-    int character;
-
-    cout << "Enter sequence: " << endl;
-
-    int charactersEntered = 0;
-    bool correct = false;
-    do {
-        character = getch();
-        charactersEntered++;
-    } while ((correct = sequence.checkCharacter(character)) && charactersEntered < sequence.getLength());
-
-    return correct;
-}
-
-/**
  * Processes the entered sequence and initiates the appropriate response
  */
 void processEnteredSequence(bool correct, Sequence* sequence) {
     if(correct) {
-        cout << "Passed" << endl;
+        cout << "Correct" << endl;
         sequence->nextPosition();
     } else {
-        cout << "Failed" << endl;
+        cout << "Not correct!" << endl;
         sequence->died();
     }
 }

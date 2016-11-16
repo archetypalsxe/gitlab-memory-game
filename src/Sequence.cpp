@@ -1,14 +1,19 @@
 #include "Sequence.h"
 
-Sequence::Sequence() {
+const int STARTING_LIVES = 3;
+
+/**
+ * Constructor takes in the difficulty as a parameter
+ */
+Sequence::Sequence(int difficulty) {
     /**
      *	1 = Only lowercase letters
      *	2 = Upper & lowercase letters
      *	3 = Upper and lowercase letters with numbers
      *	4 = Lowercase letters w/ numbers
      */
-    difficulty = 1;
-    livesRemaining = 3;
+    this->difficulty = difficulty;
+    livesRemaining = STARTING_LIVES;
     position = 0;
     srand(time(0));
 }
@@ -40,6 +45,7 @@ void Sequence::died() {
 }
 
 void Sequence::displaySequence() {
+    cout << "Remember this sequence:" << endl;
     workingPosition = 0;
 
     for(int counter = 0; counter < position + 1; counter++) {
