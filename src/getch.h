@@ -1,3 +1,6 @@
+#ifndef Getch_h
+#define Getch_h
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <termios.h>
@@ -44,3 +47,5 @@ int kbhit(void) {
 
     return 0;
 }
+
+#endif

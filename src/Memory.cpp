@@ -1,18 +1,20 @@
 #include <iostream>
-#include <stdio.h>
-#include <limits>
-
-// Used for obtaining a single keystroke
 #include "getch.h"
 
-#include "Sequence.h"
+#include "Controller.h"
+#include "Interface.h"
 
 using namespace std;
 
-const int MAX_LENGTH = 20;
-const int MIN_DIFFICULTY = 1;
-const int MAX_DIFFICULTY = 1;
+int main()
+{
+    Controller controller;
+    controller.start();
+    getch();
+}
 
+
+/*
 bool getEnteredSequence(Sequence);
 bool validDifficultySelection(int);
 int mainMenu();
@@ -21,22 +23,26 @@ void clearWindow();
 void displayDifficultyMenu();
 void performGameMainLoop(Sequence);
 void processEnteredSequence(bool, Sequence*);
+*/
 
 /**
  * This is where we initialize everything and get the game going
  */
+/*
 int main() {
     int difficulty = mainMenu();
     Sequence sequence(difficulty);
     sequence.generateSequence();
     performGameMainLoop(sequence);
 }
+*/
 
 /**
  * Retrieves input from the user until they complete the sequence or they
  * enter a character incorrectly. Returns whether or not they entered the
  * entirity of the sequence correctly or not
  */
+/*
 bool getEnteredSequence(Sequence sequence) {
     int character, charactersEntered = 0;
     bool correct = false;
@@ -51,18 +57,22 @@ bool getEnteredSequence(Sequence sequence) {
 
     return correct;
 }
+*/
 
 /**
  * Test to see whether a user's difficulty selection is valid or not
  */
+/*
 bool validDifficultySelection(int selection) {
     return selection >= MIN_DIFFICULTY && selection <= MAX_DIFFICULTY;
 }
+*/
 
 /**
  * Display the main menu to the user and returns their selection for
  * difficulty
  */
+/*
 int mainMenu() {
     int difficulty;
     do {
@@ -75,10 +85,12 @@ int mainMenu() {
     clearWindow();
     return difficulty;
 }
+*/
 
 /**
  * Clear the terminal based on whether we are in Windows or not
  */
+/*
 void clearWindow() {
     if(WINDOWS) {
         system("cls");
@@ -86,10 +98,12 @@ void clearWindow() {
         system("reset");
     }
 }
+*/
 
 /**
  * Display the difficulty menu to the user
  */
+/*
 void displayDifficultyMenu() {
     cout << "The Memory Game!" << endl << endl << endl;
     cout << "Please select your difficulty:" << endl;
@@ -98,11 +112,13 @@ void displayDifficultyMenu() {
     cout << "2) Letters and numbers" << endl;
     cout << "3) Case-sensitive letters and numbers" << endl;
 }
+*/
 
 /**
  * The main game loop where all the magic happens. This is where we take
  * user input and whatnot
  */
+/*
 void performGameMainLoop(Sequence sequence) {
     bool correct;
 
@@ -120,20 +136,24 @@ void performGameMainLoop(Sequence sequence) {
         processEnteredSequence(correct, &sequence);
     }
 }
+*/
 
 /**
  * Clears the keyboard buffer
  */
+/*
 void clearKeyboardBuffer() {
     //Clearing keyboard buffer
     while(kbhit()) {
         getch();
     }
 }
+*/
 
 /**
  * Processes the entered sequence and initiates the appropriate response
  */
+/*
 void processEnteredSequence(bool correct, Sequence* sequence) {
     if(correct) {
         cout << "Correct" << endl;
@@ -143,3 +163,4 @@ void processEnteredSequence(bool correct, Sequence* sequence) {
         sequence->died();
     }
 }
+*/

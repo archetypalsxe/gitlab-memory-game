@@ -1,4 +1,8 @@
 Improve quality of code
-    Mostly done with Memory.cpp do Sequence.*
+    Break Interface Into New Class
+    New Classes:
+        Controller
+        Interface
+        Sequence
 Add Selections for difficulties
 Implement difficulties

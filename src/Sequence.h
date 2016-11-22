@@ -1,12 +1,6 @@
 #ifndef Sequence_h
 #define Sequence_h
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-static const bool WINDOWS = true;
-#else
-static const bool WINDOWS = false;
-#endif
-
 //cout
 #include <iostream>
 //rand
@@ -17,9 +11,16 @@ static const bool WINDOWS = false;
 using namespace std;
 
 extern const int STARTING_LIVES;
+// The maximum length of a sequence
+extern const int MAX_LENGTH;
+extern const int MIN_DIFFICULTY;
+extern const int MAX_DIFFICULTY;
 
 class Sequence {
     public:
+        /**
+         * Constructor takes in the difficulty as a parameter
+         */
         Sequence(int);
         bool checkCharacter(int);
         bool hasLivesRemaining();
@@ -27,6 +28,9 @@ class Sequence {
         int getLength();
         void died();
         void displaySequence();
+        /**
+         * Generates the sequence that the user will have to enter
+         */
         void generateSequence();
         void nextPosition();
         void setDifficulty(int);

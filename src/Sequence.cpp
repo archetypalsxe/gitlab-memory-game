@@ -1,10 +1,10 @@
 #include "Sequence.h"
 
 const int STARTING_LIVES = 3;
+const int MAX_LENGTH = 20;
+const int MIN_DIFFICULTY = 1;
+const int MAX_DIFFICULTY = 1;
 
-/**
- * Constructor takes in the difficulty as a parameter
- */
 Sequence::Sequence(int difficulty) {
     /**
      *	1 = Only lowercase letters
@@ -56,14 +56,15 @@ void Sequence::displaySequence() {
     }
     cout << endl << flush;
     usleep((2 + (position * 0.75)) * 1000000);
+    /*
     if(WINDOWS) {
         system("cls");
     } else {
         system("reset");
     }
+    */
 }
 
-//Generating the sequence to use
 void Sequence::generateSequence() {
     int randomInt;
 
