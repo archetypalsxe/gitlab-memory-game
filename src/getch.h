@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-int getch( ) {
+int myGetch( ) {
     struct termios oldt, newt;
     int ch;
     tcgetattr( STDIN_FILENO, &oldt );
@@ -23,7 +23,7 @@ int getch( ) {
     return ch;
 }
 
-int kbhit(void) {
+int myKbhit(void) {
     struct termios oldt, newt;
     int ch;
     int oldf;

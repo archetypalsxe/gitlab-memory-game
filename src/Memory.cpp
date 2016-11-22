@@ -1,5 +1,4 @@
 #include <iostream>
-#include "getch.h"
 
 #include "Controller.h"
 #include "Interface.h"
@@ -10,7 +9,6 @@ int main()
 {
     Controller controller;
     controller.start();
-    getch();
 }
 
 

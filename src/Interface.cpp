@@ -3,5 +3,5 @@
 void Interface::test()
 {
     cout << "Testing" << endl;
-    getch();
+    myGetch();
 }
