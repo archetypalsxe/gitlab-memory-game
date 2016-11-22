@@ -1,7 +1,6 @@
 #ifndef Controller_h
 #define Controller_h
 
-
 #include "Interface.h"
 
 using namespace std;

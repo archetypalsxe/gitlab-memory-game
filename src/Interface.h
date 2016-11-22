@@ -1,9 +1,8 @@
 #ifndef Interface_h
 #define Interface_h
 
-
+#include "Getch.h"
 #include <iostream>
-#include "getch.h"
 
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)

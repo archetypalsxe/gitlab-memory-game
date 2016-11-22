@@ -1,16 +1,6 @@
-#ifndef Getch_h
-#define Getch_h
+#include "Getch.h"
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <termios.h>
-#include <unistd.h>
-
-//For cout/cin
-#include <iostream>
-using namespace std;
-
-int myGetch( ) {
+int getch( ) {
     struct termios oldt, newt;
     int ch;
     tcgetattr( STDIN_FILENO, &oldt );
@@ -23,7 +13,7 @@ int myGetch( ) {
     return ch;
 }
 
-int myKbhit(void) {
+int kbhit() {
     struct termios oldt, newt;
     int ch;
     int oldf;
@@ -47,5 +37,3 @@ int myKbhit(void) {
 
     return 0;
 }
-
-#endif
