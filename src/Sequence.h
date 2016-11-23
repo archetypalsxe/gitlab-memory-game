@@ -22,10 +22,20 @@ class Sequence {
          * Constructor takes in the difficulty as a parameter
          */
         Sequence(int);
+        /**
+         * Overloaded constructor that doesn't take in a difficulty as a
+         * parameter
+         */
+        Sequence();
         bool checkCharacter(int);
         bool hasLivesRemaining();
+        bool validateDifficultySelection(int);
         int getDifficulty();
         int getLength();
+        /**
+         * Get the maximum length of the word
+         */
+        int getMaxLength();
         void died();
         void displaySequence();
         /**

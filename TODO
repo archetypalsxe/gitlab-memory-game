@@ -1,8 +1,4 @@
 Improve quality of code
-    Break Interface Into New Class
-    New Classes:
-        Controller
-        Interface
-        Sequence
+    Seperate classes better
 Add Selections for difficulties
 Implement difficulties

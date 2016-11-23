@@ -18,6 +18,10 @@ Sequence::Sequence(int difficulty) {
     srand(time(0));
 }
 
+Sequence::Sequence()
+{
+}
+
 bool Sequence::hasLivesRemaining() {
     return livesRemaining > 0;
 }
@@ -31,12 +35,22 @@ bool Sequence::checkCharacter(int keyPressed) {
     }
 }
 
+bool Sequence::validateDifficultySelection(int difficulty)
+{
+    return difficulty >= MIN_DIFFICULTY && difficulty <= MAX_DIFFICULTY;
+}
+
 int Sequence::getDifficulty() {
     return difficulty;
 }
 
 int Sequence::getLength() {
     return position + 1;
+}
+
+int Sequence::getMaxLength()
+{
+    return MAX_LENGTH;
 }
 
 void Sequence::died() {
