@@ -1,16 +1,17 @@
 #include "Controller.h"
 
-// Public
 void Controller::start()
 {
-    int difficulty = interface.getDifficulty();
-    Sequence sequence(difficulty);
-    sequence.generateSequence();
-    this->sequence = sequence;
-    mainLoop();
+    try {
+        int difficulty = interface.getDifficulty();
+        this->sequence.setDifficulty(difficulty);
+        this->sequence.generateSequence();
+        mainLoop();
+    } catch (string e) {
+        cout << "There was an exception: " << e << endl;
+    }
 }
 
-// Protected
 void Controller::mainLoop()
 {
     bool correct;
@@ -20,15 +21,9 @@ void Controller::mainLoop()
         counter < sequence.getMaxLength() && sequence.hasLivesRemaining();
         counter++
     ) {
-        // @TODO This should be the interface
-        sequence.displaySequence();
-        interface.clearWindow();
-        interface.clearKeyboardBuffer();
-
-        cout << "Enter sequence: " << endl;
-
+        interface.promptUserForSequence(sequence.getSequenceString());
         correct = interface.getEnteredSequence(sequence);
-        processEnteredSequence(correct, &sequence);
+        this->processEnteredSequence(correct, &sequence);
     }
 }
 

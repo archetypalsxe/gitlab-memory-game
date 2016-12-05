@@ -2,24 +2,12 @@
 
 const int STARTING_LIVES = 3;
 const int MAX_LENGTH = 20;
-const int MIN_DIFFICULTY = 1;
-const int MAX_DIFFICULTY = 1;
-
-Sequence::Sequence(int difficulty) {
-    /**
-     *	1 = Only lowercase letters
-     *	2 = Upper & lowercase letters
-     *	3 = Upper and lowercase letters with numbers
-     *	4 = Lowercase letters w/ numbers
-     */
-    this->difficulty = difficulty;
-    livesRemaining = STARTING_LIVES;
-    position = 0;
-    srand(time(0));
-}
 
 Sequence::Sequence()
 {
+    livesRemaining = STARTING_LIVES;
+    position = 0;
+    srand(time(0));
 }
 
 bool Sequence::hasLivesRemaining() {
@@ -27,17 +15,12 @@ bool Sequence::hasLivesRemaining() {
 }
 
 bool Sequence::checkCharacter(int keyPressed) {
-    if(keyPressed == sequence[workingPosition]) {
-        workingPosition++;
+    if(keyPressed == this->sequence[workingPosition]) {
+        this->workingPosition++;
         return true;
     } else {
         return false;
     }
-}
-
-bool Sequence::validateDifficultySelection(int difficulty)
-{
-    return difficulty >= MIN_DIFFICULTY && difficulty <= MAX_DIFFICULTY;
 }
 
 int Sequence::getDifficulty() {
@@ -53,52 +36,59 @@ int Sequence::getMaxLength()
     return MAX_LENGTH;
 }
 
+string Sequence::getSequenceString()
+{
+    string sequenceString;
+
+    for(int counter = 0; counter < position + 1; counter++) {
+        sequenceString += sequence[counter];
+    }
+    return sequenceString;
+}
+
 void Sequence::died() {
     livesRemaining--;
     cout << livesRemaining << " lives left" << endl;
-}
-
-void Sequence::displaySequence() {
-    cout << "Remember this sequence:" << endl;
-    workingPosition = 0;
-
-    for(int counter = 0; counter < position + 1; counter++) {
-        if(counter > 0) {
-            cout << " ";
-        }
-        cout << sequence[counter];
-    }
-    cout << endl << flush;
-    usleep((2 + (position * 0.75)) * 1000000);
-    /*
-    if(WINDOWS) {
-        system("cls");
-    } else {
-        system("reset");
-    }
-    */
 }
 
 void Sequence::generateSequence() {
     int randomInt;
 
     for(int counter = 0; counter < 50; counter++) {
+        /**
+         *	1 = Only lowercase letters
+         *	2 = Upper & lowercase letters
+         *	3 = Upper and lowercase letters with numbers
+         *	4 = Lowercase letters w/ numbers
+         */
         switch(difficulty) {
             case 1:
-            default:
                 randomInt = rand() % 26;
                 //First letter is ASCII a
                 randomInt += 97;
                 break;
+            default:
+                throw string(
+                    "Invalid difficulty. Difficulty set to: "
+                ) + to_string(this->difficulty);
         }
         sequence[counter] = (char)randomInt;
     }
 }
 
-void Sequence::nextPosition() {
-    position++;
+void Sequence::nextPosition()
+{
+    this->position++;
+}
+
+void Sequence::resetTypingPosition()
+{
+    this->workingPosition = 0;
 }
 
 void Sequence::setDifficulty(int difficulty) {
+    if (difficulty == 0) {
+        throw string("Alphabetic or zero difficulty provided");
+    }
     this->difficulty = difficulty;
 }

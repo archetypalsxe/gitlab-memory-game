@@ -17,6 +17,9 @@
 
 using namespace std;
 
+extern const int MIN_DIFFICULTY;
+extern const int MAX_DIFFICULTY;
+
 /**
  * Class for controlling interface to the user
  */
@@ -24,17 +27,22 @@ class Interface
 {
     public:
         /**
-         * Retrieves input from the user until they complete the sequence or they
-         * enter a character incorrectly. Returns whether or not they entered the
-         * entirity of the sequence correctly or not
+         * Retrieves input from the user until they complete the sequence or
+         * they enter a character incorrectly. Returns whether or not they
+         * entered the entirity of the sequence correctly or not
          */
         bool getEnteredSequence(Sequence);
-
         /**
          * Displays the main menu to the user and gets them to select what
          * difficulty they would like to play on
          */
         int getDifficulty();
+        /**
+         * Prompt the user for a sequence to be entered
+         */
+        void promptUserForSequence(string);
+    protected:
+        bool validDifficultySelection(int);
         /**
          * Clear out anything that may still be in the buffer before the user
          * has the option to enter what they have seen
@@ -44,8 +52,6 @@ class Interface
          * Clears the terminal
          */
         void clearWindow();
-    protected:
-        bool validDifficultySelection(int);
         /**
          * Display the difficulty menu to the user
          */
