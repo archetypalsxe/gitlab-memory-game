@@ -1,6 +1,6 @@
 Improve quality of code
-    TODOs in code
-    Work on removing Sequence from Interface
     Seperate classes better
+        Move lives to controller object
+            ...Or user object
 Implement difficulties
 High scores

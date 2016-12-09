@@ -4,24 +4,10 @@ const int MIN_DIFFICULTY = 1;
 const int MAX_DIFFICULTY = 1;
 
 // Public
-bool Interface::getEnteredSequence(Sequence sequence) {
-    /** @TODO This should be seperated out so that we are not passing the
-     * sequence object into here
-     */
-    int character, charactersEntered = 0;
-    bool correct = false;
 
-    sequence.resetTypingPosition();
-
-    do {
-        character = getch();
-        charactersEntered++;
-    } while (
-        (correct = sequence.checkCharacter(character)) &&
-        charactersEntered < sequence.getLength()
-    );
-
-    return correct;
+int Interface::getCharacter()
+{
+    return getch();
 }
 
 int Interface::getDifficulty()
@@ -38,19 +24,28 @@ int Interface::getDifficulty()
     return difficulty;
 }
 
+void Interface::displayMessage(string message, bool newLine)
+{
+    cout << message;
+    if (newLine) {
+        cout << endl;
+    }
+}
+
 void Interface::promptUserForSequence(string sequenceString)
 {
-    cout << "Remember this sequence:" << endl;
-    cout <<  sequenceString << endl << flush;
+    this->displayMessage("Remember this sequence:", true);
+    this->displayMessage(sequenceString, true);
     usleep((1 + (sequenceString.length() * 0.75)) * 1000000);
 
     this->clearWindow();
     this->clearKeyboardBuffer();
 
-    cout << "Enter sequence: " << endl << flush;
+    this->displayMessage("Enter sequence:", true);
 }
 
 // Protected
+
 bool Interface::validDifficultySelection(int difficulty)
 {
     return difficulty >= MIN_DIFFICULTY && difficulty <= MAX_DIFFICULTY;
@@ -74,10 +69,13 @@ void Interface::clearWindow()
 
 void Interface::displayDifficultyMenu()
 {
-    cout << "The Memory Game!" << endl << endl << endl;
-    cout << "Please select your difficulty:" << endl;
-    cout << "==================================" << endl;
-    cout << "1) Only letters" << endl;
-    cout << "2) Letters and numbers (Currently Invalid)" << endl;
-    cout << "3) Case-sensitive letters and numbers (Currently Invalid)" << endl;
+    this->displayMessage("The Memory Game!\n\n", true);
+    this->displayMessage("Please select your difficulty:", true);
+    this->displayMessage("==================================", true);
+    this->displayMessage("1) Only letters", true);
+    this->displayMessage("2) Letters and numbers (Currently Invalid)", true);
+    this->displayMessage(
+        "3) Case-sensitive letters and numbers (Currently Invalid)",
+        true
+    );
 }

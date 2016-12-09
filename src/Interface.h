@@ -2,7 +2,6 @@
 #define Interface_h
 
 #include "Getch.h"
-#include "Sequence.h"
 
 #include <iostream>
 //std::numeric_limits
@@ -27,21 +26,29 @@ class Interface
 {
     public:
         /**
-         * Retrieves input from the user until they complete the sequence or
-         * they enter a character incorrectly. Returns whether or not they
-         * entered the entirity of the sequence correctly or not
+         * Waits for the user to enter a character and returns it
          */
-        bool getEnteredSequence(Sequence);
+        int getCharacter();
         /**
          * Displays the main menu to the user and gets them to select what
          * difficulty they would like to play on
          */
         int getDifficulty();
         /**
+         * Displays a provided message to the user
+         *
+         * @TODO Would be better if we could make this protected
+         */
+        void displayMessage(string, bool);
+        /**
          * Prompt the user for a sequence to be entered
          */
         void promptUserForSequence(string);
     protected:
+        /**
+         * Check to see whether a provided difficulty selection is a valid
+         * selection or not
+         */
         bool validDifficultySelection(int);
         /**
          * Clear out anything that may still be in the buffer before the user

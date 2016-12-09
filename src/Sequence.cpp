@@ -3,6 +3,8 @@
 const int STARTING_LIVES = 3;
 const int MAX_LENGTH = 20;
 
+// Public
+
 Sequence::Sequence()
 {
     livesRemaining = STARTING_LIVES;
@@ -27,6 +29,11 @@ int Sequence::getDifficulty() {
     return difficulty;
 }
 
+int Sequence::getLivesRemaining()
+{
+    return this->livesRemaining;
+}
+
 int Sequence::getLength() {
     return position + 1;
 }
@@ -46,34 +53,59 @@ string Sequence::getSequenceString()
     return sequenceString;
 }
 
-void Sequence::died() {
-    livesRemaining--;
-    cout << livesRemaining << " lives left" << endl;
+void Sequence::badAttempt()
+{
+    this->livesRemaining--;
 }
 
 void Sequence::generateSequence() {
+    for(int counter = 0; counter < this->getMaxLength(); counter++) {
+        sequence[counter] = (char)this->generateRandomInt();
+    }
+}
+
+void Sequence::goodAttempt()
+{
+    this->nextPosition();
+}
+
+void Sequence::setDifficulty(int difficulty) {
+    if (difficulty == 0) {
+        throw string("Alphabetic or zero difficulty provided");
+    }
+    this->difficulty = difficulty;
+}
+
+void Sequence::startNewAttempt()
+{
+    this->resetTypingPosition();
+}
+
+// Protected
+
+int Sequence::generateRandomInt()
+{
     int randomInt;
 
-    for(int counter = 0; counter < 50; counter++) {
-        /**
-         *	1 = Only lowercase letters
-         *	2 = Upper & lowercase letters
-         *	3 = Upper and lowercase letters with numbers
-         *	4 = Lowercase letters w/ numbers
-         */
-        switch(difficulty) {
-            case 1:
-                randomInt = rand() % 26;
-                //First letter is ASCII a
-                randomInt += 97;
-                break;
-            default:
-                throw string(
-                    "Invalid difficulty. Difficulty set to: "
-                ) + to_string(this->difficulty);
-        }
-        sequence[counter] = (char)randomInt;
+    switch(this->difficulty) {
+        case 1:
+            /**
+             * 1 = Only lowercase letters
+             * 2 = Upper & lowercase letters
+             * 3 = Upper and lowercase letters with numbers
+             * 4 = Lowercase letters w/ numbers
+             */
+            randomInt = rand() % 26;
+            //First letter is ASCII a
+            randomInt += 97;
+            break;
+        default:
+            throw string(
+                "Invalid difficulty. Difficulty set to: "
+            ) + to_string(this->difficulty);
     }
+
+    return randomInt;
 }
 
 void Sequence::nextPosition()
@@ -84,11 +116,4 @@ void Sequence::nextPosition()
 void Sequence::resetTypingPosition()
 {
     this->workingPosition = 0;
-}
-
-void Sequence::setDifficulty(int difficulty) {
-    if (difficulty == 0) {
-        throw string("Alphabetic or zero difficulty provided");
-    }
-    this->difficulty = difficulty;
 }

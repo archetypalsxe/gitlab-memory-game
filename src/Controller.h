@@ -28,9 +28,10 @@ class Controller
         Sequence sequence;
 
         /**
-         *
+         * Have the user attempt to enter the sequence. Returns whether or
+         * not the entire sequence was entered successfully or not
          */
-        void clearKeyBoardBuffer();
+        bool getSequenceAttempt();
         /**
          * The main loop where we display everything to the user and get
          * them to input everything they can remember
@@ -39,7 +40,7 @@ class Controller
         /**
          * Processes the entered sequence and initiates the appropriate response
          */
-        void processEnteredSequence(bool, Sequence*);
+        void processEnteredSequence(bool);
 };
 
 

@@ -1,5 +1,7 @@
 #include "Controller.h"
 
+//Public
+
 void Controller::start()
 {
     try {
@@ -8,8 +10,28 @@ void Controller::start()
         this->sequence.generateSequence();
         mainLoop();
     } catch (string e) {
-        cout << "There was an exception: " << e << endl;
+        this->interface.displayMessage("There was an exception: " + e, true);
     }
+}
+
+//Protected
+
+bool Controller::getSequenceAttempt()
+{
+    int character, charactersEntered = 0;
+    bool correct = false;
+
+    this->sequence.startNewAttempt();
+
+    do {
+        character = this->interface.getCharacter();
+        charactersEntered++;
+    } while (
+        (correct = this->sequence.checkCharacter(character)) &&
+        charactersEntered < this->sequence.getLength()
+    );
+
+    return correct;
 }
 
 void Controller::mainLoop()
@@ -22,17 +44,22 @@ void Controller::mainLoop()
         counter++
     ) {
         interface.promptUserForSequence(sequence.getSequenceString());
-        correct = interface.getEnteredSequence(sequence);
-        this->processEnteredSequence(correct, &sequence);
+        correct = this->getSequenceAttempt();
+        this->processEnteredSequence(correct);
     }
 }
 
-void Controller::processEnteredSequence(bool correct, Sequence* sequence) {
+void Controller::processEnteredSequence(bool correct)
+{
     if(correct) {
-        cout << "Correct" << endl;
-        sequence->nextPosition();
+        this->interface.displayMessage("Correct", true);
+        this->sequence.goodAttempt();
     } else {
-        cout << "Not correct!" << endl;
-        sequence->died();
+        this->interface.displayMessage("Not correct!", true);
+        this->sequence.badAttempt();
+        this->interface.displayMessage(
+            to_string(this->sequence.getLivesRemaining()) + " lives left",
+            true
+        );
     }
 }
