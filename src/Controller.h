@@ -3,6 +3,7 @@
 
 #include "Interface.h"
 #include "Sequence.h"
+#include "User.h"
 #include <stdlib.h>
 
 using namespace std;
@@ -26,6 +27,10 @@ class Controller
          * The sequence object that will be used throughout the game
          */
         Sequence sequence;
+        /**
+         * The user of the game
+         */
+        User user;
 
         /**
          * Have the user attempt to enter the sequence. Returns whether or

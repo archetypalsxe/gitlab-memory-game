@@ -10,7 +10,6 @@
 
 using namespace std;
 
-extern const int STARTING_LIVES;
 // The maximum length of a sequence
 extern const int MAX_LENGTH;
 
@@ -23,10 +22,6 @@ class Sequence {
          */
         bool checkCharacter(int);
         /**
-         * Checks to see if the user still has lives remaining
-         */
-        bool hasLivesRemaining();
-        /**
          * Returns the difficulty that was selected
          */
         int getDifficulty();
@@ -36,10 +31,6 @@ class Sequence {
          */
         int getLength();
         /**
-         * Returns the number of lives the user has remaining
-         */
-        int getLivesRemaining();
-        /**
          * Returns the maximum length of the word
          */
         int getMaxLength();
@@ -48,10 +39,6 @@ class Sequence {
          * the correct length
          */
         string getSequenceString();
-        /**
-         * User entered the sequence incorrectly
-         */
-        void badAttempt();
         /**
          * Generates the sequence that the user will have to enter
          */
@@ -72,7 +59,6 @@ class Sequence {
     protected:
         char sequence[50];
         int difficulty = 0;
-        int livesRemaining;
         int position;
         int workingPosition = 0;
 

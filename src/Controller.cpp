@@ -40,7 +40,7 @@ void Controller::mainLoop()
 
     for(
         int counter = 0;
-        counter < sequence.getMaxLength() && sequence.hasLivesRemaining();
+        counter < sequence.getMaxLength() && user.hasLivesRemaining();
         counter++
     ) {
         interface.promptUserForSequence(sequence.getSequenceString());
@@ -56,9 +56,9 @@ void Controller::processEnteredSequence(bool correct)
         this->sequence.goodAttempt();
     } else {
         this->interface.displayMessage("Not correct!", true);
-        this->sequence.badAttempt();
+        this->user.incorrectAttempt();
         this->interface.displayMessage(
-            to_string(this->sequence.getLivesRemaining()) + " lives left",
+            to_string(this->user.getLivesRemaining()) + " lives left",
             true
         );
     }

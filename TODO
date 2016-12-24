@@ -1,6 +1,5 @@
 Improve quality of code
+    Move "displayMessage" function in Interface to protected
     Seperate classes better
-        Move lives to controller object
-            ...Or user object
 Implement difficulties
 High scores

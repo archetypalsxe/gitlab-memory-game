@@ -1,19 +1,13 @@
 #include "Sequence.h"
 
-const int STARTING_LIVES = 3;
 const int MAX_LENGTH = 20;
 
 // Public
 
 Sequence::Sequence()
 {
-    livesRemaining = STARTING_LIVES;
     position = 0;
     srand(time(0));
-}
-
-bool Sequence::hasLivesRemaining() {
-    return livesRemaining > 0;
 }
 
 bool Sequence::checkCharacter(int keyPressed) {
@@ -27,11 +21,6 @@ bool Sequence::checkCharacter(int keyPressed) {
 
 int Sequence::getDifficulty() {
     return difficulty;
-}
-
-int Sequence::getLivesRemaining()
-{
-    return this->livesRemaining;
 }
 
 int Sequence::getLength() {
@@ -51,11 +40,6 @@ string Sequence::getSequenceString()
         sequenceString += sequence[counter];
     }
     return sequenceString;
-}
-
-void Sequence::badAttempt()
-{
-    this->livesRemaining--;
 }
 
 void Sequence::generateSequence() {
