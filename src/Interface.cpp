@@ -24,12 +24,18 @@ int Interface::getDifficulty()
     return difficulty;
 }
 
-void Interface::displayMessage(string message, bool newLine)
+void Interface::correctSequenceEntered()
 {
-    cout << message;
-    if (newLine) {
-        cout << endl;
-    }
+    this->displayMessage("Correct", true);
+}
+
+void Interface::incorrectSequenceEntered(int livesRemaining)
+{
+    this->displayMessage("Not correct!", true);
+    this->displayMessage(
+        to_string(livesRemaining) + " lives left",
+        true
+    );
 }
 
 void Interface::promptUserForSequence(string sequenceString)
@@ -42,6 +48,11 @@ void Interface::promptUserForSequence(string sequenceString)
     this->clearKeyboardBuffer();
 
     this->displayMessage("Enter sequence:", true);
+}
+
+void Interface::thrownException(string exceptionString)
+{
+    this->displayMessage("There was an exception: " + exceptionString, true);
 }
 
 // Protected
@@ -64,6 +75,14 @@ void Interface::clearWindow()
         system("cls");
     } else {
         system("reset");
+    }
+}
+
+void Interface::displayMessage(string message, bool newLine)
+{
+    cout << message;
+    if (newLine) {
+        cout << endl;
     }
 }
 

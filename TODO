@@ -1,5 +1,4 @@
 Improve quality of code
-    Move "displayMessage" function in Interface to protected
     Seperate classes better
 Implement difficulties
 High scores

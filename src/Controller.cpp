@@ -10,7 +10,7 @@ void Controller::start()
         this->sequence.generateSequence();
         mainLoop();
     } catch (string e) {
-        this->interface.displayMessage("There was an exception: " + e, true);
+        this->interface.thrownException(e);
     }
 }
 
@@ -52,14 +52,12 @@ void Controller::mainLoop()
 void Controller::processEnteredSequence(bool correct)
 {
     if(correct) {
-        this->interface.displayMessage("Correct", true);
         this->sequence.goodAttempt();
+        this->interface.correctSequenceEntered();
     } else {
-        this->interface.displayMessage("Not correct!", true);
         this->user.incorrectAttempt();
-        this->interface.displayMessage(
-            to_string(this->user.getLivesRemaining()) + " lives left",
-            true
+        this->interface.incorrectSequenceEntered(
+            this->user.getLivesRemaining()
         );
     }
 }

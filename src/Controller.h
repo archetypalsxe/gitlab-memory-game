@@ -4,7 +4,6 @@
 #include "Interface.h"
 #include "Sequence.h"
 #include "User.h"
-#include <stdlib.h>
 
 using namespace std;
 
