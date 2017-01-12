@@ -5,8 +5,6 @@
 #include <iostream>
 //rand
 #include <stdlib.h>
-//usleep
-#include <unistd.h>
 
 using namespace std;
 
@@ -23,6 +21,7 @@ class Sequence {
         bool checkCharacter(int);
         /**
          * Returns the difficulty that was selected
+         * @TODO Remove
          */
         int getDifficulty();
         /**
@@ -41,6 +40,7 @@ class Sequence {
         string getSequenceString();
         /**
          * Generates the sequence that the user will have to enter
+         * @TODO Make protected and have difficulty passed in
          */
         void generateSequence();
         /**
@@ -49,6 +49,7 @@ class Sequence {
         void goodAttempt();
         /**
          * Set the difficulty that the user would like to attempt
+         * @TODO Remove
          */
         void setDifficulty(int);
         /**
@@ -58,12 +59,16 @@ class Sequence {
 
     protected:
         char sequence[50];
+        /**
+         * @TODO Remove
+         */
         int difficulty = 0;
-        int position;
+        int position = 0;
         int workingPosition = 0;
 
         /**
          * Generate a random integer based on the difficulty instance object
+         * @TODO Difficulty passed in
          */
         int generateRandomInt();
         /**

@@ -37,15 +37,18 @@ class Controller
          */
         bool getSequenceAttempt();
         /**
+         * A successful attempt was made at the sequence
+         */
+        void correctSequenceAttempt();
+        /**
+         * An unsuccessful attempt was made at the sequence
+         */
+        void incorrectSequenceAttempt();
+        /**
          * The main loop where we display everything to the user and get
          * them to input everything they can remember
          */
         void mainLoop();
-        /**
-         * Processes the entered sequence and initiates the appropriate response
-         */
-        void processEnteredSequence(bool);
 };
-
 
 #endif

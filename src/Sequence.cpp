@@ -4,9 +4,12 @@ const int MAX_LENGTH = 20;
 
 // Public
 
+/**
+ * @TODO Difficulty should be passed into the constructor and then not
+ * stored within the class
+ */
 Sequence::Sequence()
 {
-    position = 0;
     srand(time(0));
 }
 
@@ -72,13 +75,13 @@ int Sequence::generateRandomInt()
     int randomInt;
 
     switch(this->difficulty) {
+        /**
+         * 1 = Only lowercase letters
+         * 2 = Upper & lowercase letters
+         * 3 = Upper and lowercase letters with numbers
+         * 4 = Lowercase letters w/ numbers
+         */
         case 1:
-            /**
-             * 1 = Only lowercase letters
-             * 2 = Upper & lowercase letters
-             * 3 = Upper and lowercase letters with numbers
-             * 4 = Lowercase letters w/ numbers
-             */
             randomInt = rand() % 26;
             //First letter is ASCII a
             randomInt += 97;

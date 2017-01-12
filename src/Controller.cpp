@@ -34,30 +34,32 @@ bool Controller::getSequenceAttempt()
     return correct;
 }
 
+void Controller::correctSequenceAttempt()
+{
+    this->sequence.goodAttempt();
+    this->interface.correctSequenceEntered();
+}
+
+void Controller::incorrectSequenceAttempt()
+{
+    this->user.incorrectAttempt();
+    this->interface.incorrectSequenceEntered(
+        this->user.getLivesRemaining()
+    );
+}
+
 void Controller::mainLoop()
 {
-    bool correct;
-
     for(
         int counter = 0;
         counter < sequence.getMaxLength() && user.hasLivesRemaining();
         counter++
     ) {
         interface.promptUserForSequence(sequence.getSequenceString());
-        correct = this->getSequenceAttempt();
-        this->processEnteredSequence(correct);
-    }
-}
-
-void Controller::processEnteredSequence(bool correct)
-{
-    if(correct) {
-        this->sequence.goodAttempt();
-        this->interface.correctSequenceEntered();
-    } else {
-        this->user.incorrectAttempt();
-        this->interface.incorrectSequenceEntered(
-            this->user.getLivesRemaining()
-        );
+        if(this->getSequenceAttempt()) {
+            this->correctSequenceAttempt();
+        } else {
+            this->incorrectSequenceAttempt();
+        }
     }
 }
