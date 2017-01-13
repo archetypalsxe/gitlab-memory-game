@@ -13,7 +13,6 @@ using namespace std;
 class Controller
 {
     public:
-        Controller();
         /**
          * Initiates the game
          */
@@ -26,7 +25,7 @@ class Controller
         /**
          * The sequence object that will be used throughout the game
          */
-        Sequence sequence;
+        Sequence* sequence;
         /**
          * The user of the game
          */
