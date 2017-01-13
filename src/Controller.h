@@ -13,6 +13,7 @@ using namespace std;
 class Controller
 {
     public:
+        Controller();
         /**
          * Initiates the game
          */

@@ -4,13 +4,10 @@ const int MAX_LENGTH = 20;
 
 // Public
 
-/**
- * @TODO Difficulty should be passed into the constructor and then not
- * stored within the class
- */
-Sequence::Sequence()
+Sequence::Sequence(int difficulty = 1)
 {
     srand(time(0));
+    this->generateSequence(difficulty);
 }
 
 bool Sequence::checkCharacter(int keyPressed) {
@@ -20,10 +17,6 @@ bool Sequence::checkCharacter(int keyPressed) {
     } else {
         return false;
     }
-}
-
-int Sequence::getDifficulty() {
-    return difficulty;
 }
 
 int Sequence::getLength() {
@@ -45,22 +38,9 @@ string Sequence::getSequenceString()
     return sequenceString;
 }
 
-void Sequence::generateSequence() {
-    for(int counter = 0; counter < this->getMaxLength(); counter++) {
-        sequence[counter] = (char)this->generateRandomInt();
-    }
-}
-
 void Sequence::goodAttempt()
 {
     this->nextPosition();
-}
-
-void Sequence::setDifficulty(int difficulty) {
-    if (difficulty == 0) {
-        throw string("Alphabetic or zero difficulty provided");
-    }
-    this->difficulty = difficulty;
 }
 
 void Sequence::startNewAttempt()
@@ -70,11 +50,11 @@ void Sequence::startNewAttempt()
 
 // Protected
 
-int Sequence::generateRandomInt()
+int Sequence::generateRandomInt(int difficulty)
 {
     int randomInt;
 
-    switch(this->difficulty) {
+    switch(difficulty) {
         /**
          * 1 = Only lowercase letters
          * 2 = Upper & lowercase letters
@@ -89,10 +69,16 @@ int Sequence::generateRandomInt()
         default:
             throw string(
                 "Invalid difficulty. Difficulty set to: "
-            ) + to_string(this->difficulty);
+            ) + to_string(difficulty);
     }
 
     return randomInt;
+}
+
+void Sequence::generateSequence(int difficulty) {
+    for(int counter = 0; counter < this->getMaxLength(); counter++) {
+        sequence[counter] = (char)this->generateRandomInt(difficulty);
+    }
 }
 
 void Sequence::nextPosition()

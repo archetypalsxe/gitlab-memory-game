@@ -2,12 +2,19 @@
 
 //Public
 
+/**
+ * @TODO Fix this!!!!
+ */
+Controller::Controller(): sequence(1)
+{
+    this->sequence = Sequence(1);
+}
+
 void Controller::start()
 {
     try {
         int difficulty = interface.getDifficulty();
-        this->sequence.setDifficulty(difficulty);
-        this->sequence.generateSequence();
+        this->sequence = Sequence(difficulty);
         mainLoop();
     } catch (string e) {
         this->interface.thrownException(e);
