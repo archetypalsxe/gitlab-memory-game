@@ -1,7 +1,7 @@
 #include "Interface.h"
 
 const int MIN_DIFFICULTY = 1;
-const int MAX_DIFFICULTY = 1;
+const int MAX_DIFFICULTY = 3;
 
 // Public
 
@@ -91,10 +91,7 @@ void Interface::displayDifficultyMenu()
     this->displayMessage("The Memory Game!\n\n", true);
     this->displayMessage("Please select your difficulty:", true);
     this->displayMessage("==================================", true);
-    this->displayMessage("1) Only letters", true);
-    this->displayMessage("2) Letters and numbers (Currently Invalid)", true);
-    this->displayMessage(
-        "3) Case-sensitive letters and numbers (Currently Invalid)",
-        true
-    );
+    this->displayMessage("1) Only lowercase letters", true);
+    this->displayMessage("2) Lowercase letters with numbers", true);
+    this->displayMessage("3) Upper and lowercase letters with numbers", true);
 }

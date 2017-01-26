@@ -55,6 +55,11 @@ class Sequence {
          */
         int generateRandomInt(int);
         /**
+         * Convert the randomly generated integer into an ASCII value for
+         * use throughout the program
+         */
+        int getAsciiValue(int);
+        /**
          * Generates the sequence that the user will have to enter
          */
         void generateSequence(int);

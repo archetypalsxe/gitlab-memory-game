@@ -52,24 +52,44 @@ void Sequence::startNewAttempt()
 
 int Sequence::generateRandomInt(int difficulty)
 {
-    int randomInt;
+    int randomMax;
 
     switch(difficulty) {
         /**
          * 1 = Only lowercase letters
-         * 2 = Upper & lowercase letters
-         * 3 = Upper and lowercase letters with numbers
-         * 4 = Lowercase letters w/ numbers
+         * 2 = Lowercase letters w/ numbers
+         * 3 = Upper & lowercase letters with numbers
          */
         case 1:
-            randomInt = rand() % 26;
-            //First letter is ASCII a
-            randomInt += 97;
+            randomMax = 26;
+            break;
+        case 2:
+            randomMax = 36;
+            break;
+        case 3:
+            randomMax = 62;
             break;
         default:
             throw string(
                 "Invalid difficulty. Difficulty set to: "
             ) + to_string(difficulty);
+    }
+
+    return this->getAsciiValue(rand() % randomMax);
+}
+
+int Sequence::getAsciiValue(int randomInt)
+{
+    // Lowercase letter
+    if(randomInt < 26) {
+        // a
+        randomInt += 97;
+    } else if (randomInt < 36) { // Number
+        // 0 (48 - 26)
+        randomInt += 22;
+    } else { // Uppercase letter
+        // A (65 - 36)
+        randomInt += 29;
     }
 
     return randomInt;
