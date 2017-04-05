@@ -97,7 +97,9 @@ int Sequence::getAsciiValue(int randomInt)
 
 void Sequence::generateSequence(int difficulty) {
     for(int counter = 0; counter < this->getMaxLength(); counter++) {
-        sequence[counter] = (char)this->generateRandomInt(difficulty);
+        sequence[counter] = static_cast<char>(
+            this->generateRandomInt(difficulty)
+        );
     }
 }
 

@@ -14,6 +14,10 @@ class Controller
 {
     public:
         /**
+         * Constructor
+         */
+        Controller();
+        /**
          * Initiates the game
          */
         void start();
@@ -25,7 +29,7 @@ class Controller
         /**
          * The sequence object that will be used throughout the game
          */
-        Sequence* sequence;
+        Sequence sequence;
         /**
          * The user of the game
          */
